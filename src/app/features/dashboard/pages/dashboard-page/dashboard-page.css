@@ -1,4 +1,4 @@
 .aviso-fila { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--borde); font-size: 14px; }
 .aviso-fila:last-child { border-bottom: 0; }
-.sube .material-symbols-rounded { color: var(--rojo-700); } .baja .material-symbols-rounded { color: var(--verde-700); }
-.info .material-symbols-rounded { color: var(--azul-700); } .alerta .material-symbols-rounded { color: var(--naranja-600); }
+.sube .material-symbols-rounded { color: var(--rojo-700); } .baja .material-symbols-rounded { color: var(--ok-700); }
+.info .material-symbols-rounded { color: var(--azul-700); } .alerta .material-symbols-rounded { color: var(--acento-600); }

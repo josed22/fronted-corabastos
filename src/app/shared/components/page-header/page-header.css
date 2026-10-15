@@ -1,5 +1,5 @@
 .ph { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
-h1 { font-size: 26px; }
+h1 { font-size: 22px; }
 p { color: var(--texto-suave); margin-top: 4px; }
 .ph-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-@media (max-width: 760px) { h1 { font-size: 22px; } }
+@media (max-width: 760px) { h1 { font-size: 20px; } }

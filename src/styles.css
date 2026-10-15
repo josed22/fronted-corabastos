@@ -1,31 +1,37 @@
 /* ===== Corabastos Conecta · estilos globales ===== */
 :root {
-  --verde-900: #123d1a;
-  --verde-800: #1b5e20;
-  --verde-700: #2e7d32;
-  --verde-600: #388e3c;
-  --verde-100: #e3f1e4;
-  --verde-50: #f1f8f1;
-  --naranja-600: #ef6c00;
-  --naranja-500: #f57c00;
-  --naranja-100: #fff0dc;
-  --rojo-700: #c62828;
-  --rojo-100: #fde7e7;
-  --azul-700: #1565c0;
-  --azul-100: #e3effc;
-  --ambar-100: #fff6d6;
-  --ambar-800: #8a5a00;
+  /* Azules básicos (los mismos de la guía del profesor) */
+  --pri-900: #1F3864;
+  --pri-800: #2E5090;
+  --pri-700: #2E75B6;
+  --pri-600: #4A8BC9;
+  --pri-100: #DCE9F7;
+  --pri-50: #F0F6FC;
+  /* Aviso (campana) y advertencias */
+  --acento-600: #B26A00;
+  --acento-500: #E53935;
+  --acento-100: #FFF4E0;
+  /* Éxito / baja de precio */
+  --ok-100: #E3F3E5;
+  --ok-700: #2E7D32;
+  --ok-800: #1B5E20;
+  --rojo-700: #C62828;
+  --rojo-100: #FDE7E7;
+  --azul-700: #1565C0;
+  --azul-100: #E3EFFC;
+  --ambar-100: #FFF6D6;
+  --ambar-800: #8A5A00;
 
-  --bg: #f3f5ef;
-  --surface: #ffffff;
-  --surface-2: #f7f9f4;
-  --borde: #e1e6da;
-  --texto: #1d2a1f;
-  --texto-suave: #5b6a5e;
-  --sombra: 0 1px 2px rgb(20 50 25 / 6%), 0 4px 16px rgb(20 50 25 / 6%);
-  --radio: 14px;
-  --radio-sm: 10px;
-  --sidebar: 264px;
+  --bg: #F4F6F9;
+  --surface: #FFFFFF;
+  --surface-2: #F7F8FA;
+  --borde: #D9DEE5;
+  --texto: #222222;
+  --texto-suave: #5F6B7A;
+  --sombra: none;
+  --radio: 6px;
+  --radio-sm: 4px;
+  --sidebar: 240px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -35,11 +41,11 @@ body {
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   font-size: 15px; line-height: 1.5;
 }
-h1, h2, h3, h4 { margin: 0; line-height: 1.25; letter-spacing: -0.01em; }
+h1, h2, h3, h4 { margin: 0; line-height: 1.25; letter-spacing: 0; }
 p { margin: 0; }
 a { color: inherit; }
 button { font: inherit; }
-:focus-visible { outline: 3px solid color-mix(in srgb, var(--verde-700) 55%, white); outline-offset: 2px; }
+:focus-visible { outline: 3px solid color-mix(in srgb, var(--pri-700) 55%, white); outline-offset: 2px; }
 
 .material-symbols-rounded {
   font-family: 'Material Symbols Rounded'; font-weight: normal; font-style: normal; font-size: 22px; line-height: 1;
@@ -56,22 +62,22 @@ button { font: inherit; }
 }
 .btn:active { transform: translateY(1px); }
 .btn .material-symbols-rounded { font-size: 20px; }
-.btn-primary { background: var(--verde-700); color: #fff; box-shadow: 0 2px 6px rgb(46 125 50 / 30%); }
-.btn-primary:hover { background: var(--verde-800); }
-.btn-accent { background: var(--naranja-500); color: #fff; }
-.btn-accent:hover { background: var(--naranja-600); }
+.btn-primary { background: var(--pri-700); color: #fff;  }
+.btn-primary:hover { background: var(--pri-800); }
+.btn-accent { background: var(--acento-500); color: #fff; }
+.btn-accent:hover { background: var(--acento-600); }
 .btn-ghost { background: var(--surface); color: var(--texto); border-color: var(--borde); }
 .btn-ghost:hover { background: var(--surface-2); }
 .btn-danger { background: var(--rojo-700); color: #fff; }
 .btn-danger:hover { background: #a61f1f; }
 .btn[disabled] { opacity: .55; cursor: not-allowed; }
 .icon-btn {
-  display: inline-grid; place-items: center; width: 38px; height: 38px; border: 0; border-radius: 10px;
+  display: inline-grid; place-items: center; width: 36px; height: 36px; border: 0; border-radius: 4px;
   background: transparent; color: var(--texto-suave); cursor: pointer; transition: background .15s, color .15s;
 }
-.icon-btn:hover { background: var(--verde-50); color: var(--verde-800); }
+.icon-btn:hover { background: var(--pri-50); color: var(--pri-800); }
 .icon-btn.danger:hover { background: var(--rojo-100); color: var(--rojo-700); }
-.icon-btn.primary { color: var(--verde-700); }
+.icon-btn.primary { color: var(--pri-700); }
 
 /* ---- formularios ---- */
 .field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
@@ -82,18 +88,18 @@ button { font: inherit; }
   background: var(--surface); color: var(--texto); font: inherit; transition: border-color .15s, box-shadow .15s;
 }
 textarea.input { resize: vertical; }
-.input:focus, .select:focus { outline: none; border-color: var(--verde-700); box-shadow: 0 0 0 3px rgb(46 125 50 / 18%); }
+.input:focus, .select:focus { outline: none; border-color: var(--pri-700); box-shadow: 0 0 0 2px rgb(46 117 182 / 25%); }
 .input.ng-invalid.ng-touched, .select.ng-invalid.ng-touched { border-color: var(--rojo-700); }
 .error { color: var(--rojo-700); font-size: 12.5px; }
 .hint { color: var(--texto-suave); font-size: 12.5px; }
 .check { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; }
-.check input { width: 18px; height: 18px; accent-color: var(--verde-700); }
+.check input { width: 18px; height: 18px; accent-color: var(--pri-700); }
 
 /* ---- tarjetas y rejillas ---- */
 .card { background: var(--surface); border: 1px solid var(--borde); border-radius: var(--radio); box-shadow: var(--sombra); }
 .card-pad { padding: 20px; }
 .card-title { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
-.card-title .material-symbols-rounded { color: var(--verde-700); }
+.card-title .material-symbols-rounded { color: var(--pri-700); }
 .grid { display: grid; gap: 16px; }
 .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -108,12 +114,12 @@ textarea.input { resize: vertical; }
   background: var(--azul-100); color: #0d3b75; font-size: 14px;
 }
 .aviso .material-symbols-rounded { font-size: 20px; margin-top: 1px; }
-.aviso.verde { background: var(--verde-100); color: var(--verde-900); }
+.aviso.verde { background: var(--pri-100); color: var(--pri-900); }
 .aviso.ambar { background: var(--ambar-100); color: var(--ambar-800); }
 
 /* ---- tabla (Angular Material: ordenar, buscar y paginar) ---- */
 html {
-  --mat-sys-primary: var(--verde-700);
+  --mat-sys-primary: var(--pri-700);
   --mat-sys-on-surface: var(--texto);
   --mat-sys-on-surface-variant: var(--texto-suave);
   --mat-sys-surface: var(--surface);

@@ -1,5 +1,4 @@
-.tb { display: inline-flex; align-items: center; gap: 2px; padding: 3px 10px 3px 6px; border-radius: 999px;
-  background: #eef0ec; color: var(--texto-suave); font-weight: 600; font-size: 13px; white-space: nowrap; }
+.tb { display: inline-flex; align-items: center; gap: 2px; color: var(--texto-suave); font-weight: 600; font-size: 14px; white-space: nowrap; }
 .tb .material-symbols-rounded { font-size: 18px; }
-.tb.up { background: var(--rojo-100); color: var(--rojo-700); }
-.tb.down { background: var(--verde-100); color: var(--verde-800); }
+.tb.up { color: var(--rojo-700); }
+.tb.down { color: var(--ok-700); }

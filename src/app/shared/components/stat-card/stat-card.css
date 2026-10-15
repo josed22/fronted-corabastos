@@ -1,13 +1,11 @@
 .sc { display: flex; gap: 14px; align-items: center; padding: 18px; height: 100%; }
-.ico { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; flex: none; }
+.ico { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 6px; flex: none; }
 .ico .material-symbols-rounded { font-size: 26px; }
-.verde { background: var(--verde-100); color: var(--verde-800); }
-.naranja { background: var(--naranja-100); color: var(--naranja-600); }
-.azul { background: var(--azul-100); color: var(--azul-700); }
-.rojo { background: var(--rojo-100); color: var(--rojo-700); }
+/* un solo estilo para todas las tarjetas: más sencillo y uniforme */
+.verde, .naranja, .azul, .rojo { background: var(--pri-100); color: var(--pri-800); }
 .txt { display: flex; flex-direction: column; min-width: 0; }
 .lbl { color: var(--texto-suave); font-size: 13px; font-weight: 500; }
-.val { font-size: 26px; line-height: 1.15; letter-spacing: -0.02em; }
+.val { font-size: 26px; line-height: 1.15;  }
 @media (max-width: 460px) {
   .sc { flex-direction: column; align-items: flex-start; gap: 8px; padding: 14px; }
   .ico { width: 40px; height: 40px; }

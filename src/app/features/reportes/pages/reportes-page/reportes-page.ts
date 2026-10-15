@@ -38,7 +38,7 @@ export class ReportesPage {
   protected readonly promedios = computed<BarItem[]>(() => this.store.categorias().map((c) => {
     const v = this.store.variaciones().filter((x) => x.categoria === c.nombre);
     const prom = v.length ? v.reduce((s, x) => s + x.precioHoy, 0) / v.length : 0;
-    return { label: c.nombre, value: prom, texto: `$${Math.round(prom).toLocaleString('es-CO')}`, color: '#ef6c00' };
+    return { label: c.nombre, value: prom, texto: `$${Math.round(prom).toLocaleString('es-CO')}`, color: '#2E75B6' };
   }));
 
   protected imprimir() { window.print(); }

@@ -1,4 +1,4 @@
 .rol { display: flex; gap: 14px; align-items: flex-start; }
-.ico { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 13px; background: var(--verde-100); color: var(--verde-800); flex: none; }
+.ico { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 13px; background: var(--pri-100); color: var(--pri-800); flex: none; }
 h3 { font-size: 17px; } p { font-size: 13.5px; margin: 2px 0 8px; }
-.num { font-size: 13.5px; color: var(--verde-800); }
+.num { font-size: 13.5px; color: var(--pri-800); }
