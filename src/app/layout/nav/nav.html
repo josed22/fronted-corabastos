@@ -1,0 +1,5 @@
+<nav class="menu" aria-label="Menú principal">
+  @for (m of auth.modulos(); track m.id) {
+    <a [routerLink]="m.ruta" routerLinkActive="activo">{{ m.nombre }}</a>
+  }
+</nav>

@@ -12,7 +12,6 @@ import { StatCard } from '../../../../shared/components/stat-card/stat-card';
   selector: 'app-dashboard-page',
   imports: [PageHeader, StatCard, DataTable, BarChart, RouterLink],
   templateUrl: './dashboard-page.html',
-  styleUrl: './dashboard-page.css',
 })
 export class DashboardPage {
   protected readonly auth = inject(AuthService);
@@ -53,18 +52,5 @@ export class DashboardPage {
   ];
   protected readonly colStock: TableColumn[] = [
     { key: 'producto', label: 'Producto' }, { key: 'cantidad', label: 'Disponible', type: 'number' }, { key: 'unidad', label: 'Unidad' },
-  ];
-
-  // ----- comprador -----
-  protected readonly misReservasActivas = computed(() => this.store.reservas()
-    .filter((r) => r.idUsuario === this.auth.usuario()?.id && (r.estadoReserva === 'Pendiente' || r.estadoReserva === 'Confirmada')).length);
-  protected readonly misFavoritos = computed(() => this.store.favoritos().filter((f) => f.idUsuario === this.auth.usuario()?.id)
-    .map((f) => this.store.variacionDe(f.idProducto)).filter((v) => !!v).map((v) => ({
-      producto: v!.producto, categoria: v!.categoria, precioHoy: v!.precioHoy, variacionPct: v!.variacionPct,
-    })));
-  protected readonly favoritosQueBajaron = computed(() => this.misFavoritos().filter((f) => f.variacionPct < 0).length);
-  protected readonly avisos = computed(() => this.store.avisosPara(this.auth.usuario()));
-  protected readonly colFavoritos: TableColumn[] = [
-    { key: 'producto', label: 'Producto' }, { key: 'precioHoy', label: 'Precio hoy', type: 'currency' }, { key: 'variacionPct', label: 'Variación', type: 'trend' },
   ];
 }

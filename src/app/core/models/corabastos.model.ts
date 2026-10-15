@@ -47,4 +47,3 @@ export interface ItemCatalogo {
   cantidad: number; precioHoy: number; variacionPct: number;
 }
 
-export interface AvisoUsuario { icono: string; texto: string; tono: 'sube' | 'baja' | 'info' | 'alerta'; }

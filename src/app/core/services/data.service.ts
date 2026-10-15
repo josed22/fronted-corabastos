@@ -1,6 +1,6 @@
 import { Injectable, computed, signal } from '@angular/core';
 import {
-  AlertaPrecio, AvisoUsuario, Categoria, DetalleReserva, EstadoReserva, Favorito, Inventario, ItemCatalogo, Modulo,
+  AlertaPrecio, Categoria, DetalleReserva, EstadoReserva, Favorito, Inventario, ItemCatalogo, Modulo,
   Municipio, Pabellon, Permiso, PrecioDia, Producto, Reserva, Rol, Tienda, Tipo, Usuario, VariacionPrecio,
 } from '../models/corabastos.model';
 import {
@@ -163,45 +163,5 @@ export class DataService {
     }
     this.favoritos.update((l) => [...l, { idUsuario, idProducto }]);
     return true;
-  }
-
-  // ---------- avisos de la campana según el rol ----------
-  avisosPara(usuario: Usuario | null): AvisoUsuario[] {
-    if (!usuario) return [];
-    const rol = this.nombreRol(usuario.idRol);
-    const avisos: AvisoUsuario[] = [];
-    const fmt = (n: number) => `${Math.abs(n).toLocaleString('es-CO')}%`;
-
-    if (rol === 'Comprador') {
-      for (const a of this.alertas().filter((x) => x.idUsuario === usuario.id)) {
-        const v = this.variacionDe(a.idProducto);
-        if (!v) continue;
-        if (a.tipo === 'sube' && v.variacionPct >= a.umbral) {
-          avisos.push({ icono: 'trending_up', tono: 'sube', texto: `${v.producto} subió ${fmt(v.variacionPct)} frente a ayer (tu alerta: más de ${a.umbral}%)` });
-        } else if (a.tipo === 'baja' && v.variacionPct <= -a.umbral) {
-          avisos.push({ icono: 'trending_down', tono: 'baja', texto: `${v.producto} bajó ${fmt(v.variacionPct)} frente a ayer (tu alerta: más de ${a.umbral}%)` });
-        }
-      }
-      for (const r of this.reservas().filter((x) => x.idUsuario === usuario.id && x.estadoReserva === 'Confirmada')) {
-        avisos.push({ icono: 'check_circle', tono: 'info', texto: `Tu reserva ${r.codigo} fue confirmada. Retiro: ${r.fechaRetiro}` });
-      }
-    } else if (rol === 'Vendedor') {
-      const t = this.tiendaDeVendedor(usuario.id);
-      if (t) {
-        const pendientes = this.reservas().filter((r) => r.idTienda === t.id && r.estadoReserva === 'Pendiente').length;
-        if (pendientes) avisos.push({ icono: 'event_available', tono: 'info', texto: `Tienes ${pendientes} reserva(s) pendiente(s) por confirmar` });
-        for (const i of this.inventario().filter((x) => x.idTienda === t.id && x.estado && x.cantidad < 100).slice(0, 3)) {
-          avisos.push({ icono: 'warning', tono: 'alerta', texto: `Stock bajo de ${this.producto(i.idProducto)?.nombre}: ${i.cantidad} ${this.producto(i.idProducto)?.unidad}` });
-        }
-      }
-    } else {
-      for (const v of [...this.variaciones()].sort((a, b) => Math.abs(b.variacionPct) - Math.abs(a.variacionPct)).slice(0, 4)) {
-        if (Math.abs(v.variacionPct) >= 15) {
-          avisos.push({ icono: v.variacionPct > 0 ? 'trending_up' : 'trending_down', tono: v.variacionPct > 0 ? 'sube' : 'baja',
-            texto: `${v.producto} ${v.variacionPct > 0 ? 'subió' : 'bajó'} ${fmt(v.variacionPct)} hoy` });
-        }
-      }
-    }
-    return avisos.slice(0, 6);
   }
 }

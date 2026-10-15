@@ -1,16 +1,14 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Sidebar } from '../sidebar/sidebar';
-import { Navbar } from '../navbar/navbar';
+import { Header } from '../header/header';
+import { Nav } from '../nav/nav';
 import { Footer } from '../footer/footer';
 
-/** Estructura de las pantallas internas: menú lateral, barra superior y contenido. */
+/** Estructura de las pantallas internas: encabezado, menú arriba, contenido y pie de página. */
 @Component({
   selector: 'app-main-layout',
-  imports: [RouterOutlet, Sidebar, Navbar, Footer],
+  imports: [RouterOutlet, Header, Nav, Footer],
   templateUrl: './main-layout.html',
   styleUrl: './main-layout.css',
 })
-export class MainLayout {
-  protected readonly menuAbierto = signal(false);
-}
+export class MainLayout {}

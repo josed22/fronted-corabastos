@@ -1,26 +1,6 @@
-/* Login sencillo: una tarjeta centrada */
 .lg { min-height: 100dvh; display: grid; place-items: center; padding: 24px 16px; background: var(--bg); }
-.caja { width: min(460px, 100%); padding: 28px; }
-.titulo { text-align: center; margin-bottom: 20px; }
-.logo { display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: 6px; background: var(--pri-900); color: #fff; font-size: 28px; margin-bottom: 8px; }
-.titulo h1 { font-size: 22px; color: var(--pri-900); }
-.caja h2 { font-size: 18px; }
-form { display: flex; flex-direction: column; gap: 16px; margin: 18px 0; }
-.roles { border: 0; padding: 0; margin: 18px 0 0; min-width: 0; }
-.roles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
-.rol { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 8px; border: 1px solid var(--borde);
-  border-radius: 4px; cursor: pointer; text-align: center; background: var(--surface); }
-.rol input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
-.rol .material-symbols-rounded { font-size: 26px; color: var(--texto-suave); }
-.rol strong { font-size: 13.5px; }
-.rol:hover { border-color: var(--pri-600); }
-.rol.on { border: 2px solid var(--pri-700); background: var(--pri-50); padding: 11px 7px; }
-.rol.on .material-symbols-rounded { color: var(--pri-700); }
-.rol:has(input:focus-visible) { outline: 2px solid var(--pri-700); outline-offset: 2px; }
-.roles .hint { margin-top: 10px; }
-.clave { position: relative; }
-.clave .input { padding-right: 52px; }
-.clave .icon-btn { position: absolute; right: 4px; top: 4px; }
-.entrar { width: 100%; min-height: 44px; font-size: 15px; }
-
-@media (max-width: 420px) { .roles-grid { grid-template-columns: 1fr; } .rol { flex-direction: row; justify-content: flex-start; padding: 10px 14px; } .rol.on { padding: 9px 13px; } }
+.caja { width: min(380px, 100%); padding: 24px; background: var(--surface); border: 1px solid var(--borde); border-radius: 4px; }
+h1 { font-size: 20px; color: var(--pri-900); text-align: center; }
+h2 { font-size: 16px; text-align: center; margin: 4px 0 18px; font-weight: 500; color: var(--texto-suave); }
+form { display: flex; flex-direction: column; gap: 14px; }
+.nota { margin-top: 16px; font-size: 13px; color: var(--texto-suave); text-align: center; }

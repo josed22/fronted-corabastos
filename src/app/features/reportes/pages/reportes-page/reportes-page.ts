@@ -41,5 +41,4 @@ export class ReportesPage {
     return { label: c.nombre, value: prom, texto: `$${Math.round(prom).toLocaleString('es-CO')}`, color: '#2E75B6' };
   }));
 
-  protected imprimir() { window.print(); }
 }

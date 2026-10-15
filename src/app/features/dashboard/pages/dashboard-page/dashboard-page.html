@@ -47,27 +47,4 @@
       </div>
     }
   }
-  @default {
-    <div class="stack">
-      <div class="grid grid-4">
-        <app-stat-card icon="bookmark" label="Mis reservas activas" [value]="misReservasActivas()" />
-        <app-stat-card icon="favorite" tone="naranja" label="Productos favoritos" [value]="misFavoritos().length" />
-        <app-stat-card icon="trending_down" tone="azul" label="Favoritos que bajaron" [value]="favoritosQueBajaron()" />
-        <app-stat-card icon="notifications" tone="rojo" label="Avisos de hoy" [value]="avisos().length" />
-      </div>
-      <div class="grid grid-2">
-        <section>
-          <h3 class="card-title"><span class="material-symbols-rounded">favorite</span>Mis favoritos hoy</h3>
-          <app-data-table [columns]="colFavoritos" [rows]="misFavoritos()" [searchable]="false" [paginate]="false" emptyText="Aún no tienes favoritos" />
-          <a class="btn btn-primary" style="margin-top:12px" routerLink="/catalogo"><span class="material-symbols-rounded">travel_explore</span>Buscar productos</a>
-        </section>
-        <section class="card card-pad">
-          <h3 class="card-title"><span class="material-symbols-rounded">notifications</span>Avisos</h3>
-          @for (a of avisos(); track $index) {
-            <p class="aviso-fila" [class]="a.tono"><span class="material-symbols-rounded">{{ a.icono }}</span>{{ a.texto }}</p>
-          } @empty { <p class="muted">No tienes avisos por ahora.</p> }
-        </section>
-      </div>
-    </div>
-  }
 }

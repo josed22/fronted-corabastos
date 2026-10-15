@@ -1,0 +1,7 @@
+<header class="cab">
+  <h1>Corabastos Conecta</h1>
+  <div class="sesion">
+    <span>{{ nombre() }} ({{ auth.rol() }})</span>
+    <button type="button" class="salir" (click)="auth.logout()">Cerrar sesión</button>
+  </div>
+</header>

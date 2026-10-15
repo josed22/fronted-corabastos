@@ -31,7 +31,6 @@
   --sombra: none;
   --radio: 6px;
   --radio-sm: 4px;
-  --sidebar: 240px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -141,7 +140,7 @@ html {
 }
 @media (max-width: 760px) {
   body { font-size: 14.5px; }
-  .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+  .grid-3, .grid-2 { grid-template-columns: 1fr; }
 }
 @media (max-width: 460px) {
   .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }

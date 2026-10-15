@@ -1,0 +1,4 @@
+.menu { display: flex; background: var(--pri-800); overflow-x: auto; padding: 0 12px; }
+a { padding: 11px 16px; color: #fff; text-decoration: none; white-space: nowrap; font-size: 14.5px; border-bottom: 3px solid transparent; }
+a:hover { background: rgb(255 255 255 / 12%); }
+a.activo { border-bottom-color: #fff; font-weight: 600; background: rgb(255 255 255 / 12%); }
