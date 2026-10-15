@@ -1,0 +1,23 @@
+<app-page-header title="Precios del día" [subtitle]="'Precios por unidad en pesos colombianos y su variación frente a ayer · ' + store.hoy" />
+
+<div class="grid grid-3" style="margin-bottom:20px">
+  <app-stat-card icon="trending_up" tone="rojo" label="Productos que subieron" [value]="suben()" hint="Frente al precio de ayer" />
+  <app-stat-card icon="trending_down" tone="verde" label="Productos que bajaron" [value]="bajan()" hint="Buen momento para comprar" />
+  <app-stat-card icon="inventory_2" tone="azul" label="Productos con precio" [value]="store.variaciones().length" hint="Publicados por el administrador" />
+</div>
+
+@if (!esAdmin()) {
+  <div class="aviso verde" style="margin-bottom:16px"><span class="material-symbols-rounded">verified</span>
+    <span>Los precios los publica el administrador de la plaza cada día. Aquí solo puedes consultarlos.</span></div>
+}
+
+<div class="row" style="margin-bottom:16px">
+  <app-filter-select label="Categoría" todos="Todas las categorías" [options]="categorias()" [(value)]="categoria" />
+</div>
+
+<app-data-table [columns]="columnas" [rows]="filas()" [actions]="acciones()" placeholder="Buscar producto o código…" (action)="alAccion($event)" />
+
+<app-precio-historial [producto]="historial()" [filas]="filasHistorial()" (closed)="historial.set(null)" />
+
+<app-form-modal [open]="editando() !== null" [title]="'Fijar precio de hoy · ' + (editando()?.producto ?? '')" [fields]="camposPrecio()"
+  [initial]="null" submitLabel="Publicar precio" (saved)="publicar($event)" (closed)="editando.set(null)" />

@@ -1,0 +1,7 @@
+<header class="ph">
+  <div class="ph-txt">
+    <h1>{{ title() }}</h1>
+    @if (subtitle()) { <p>{{ subtitle() }}</p> }
+  </div>
+  <div class="ph-actions no-print"><ng-content /></div>
+</header>

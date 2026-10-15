@@ -1,0 +1,12 @@
+<app-data-table [columns]="columns()" [rows]="rows()" [actions]="acciones" [placeholder]="'Buscar ' + plural() + '…'" (action)="alAccion($event)">
+  <button toolbar type="button" class="btn btn-primary" (click)="abrirCrear()">
+    <span class="material-symbols-rounded">add</span>Nuevo {{ entity() }}
+  </button>
+</app-data-table>
+
+<app-form-modal [open]="formAbierto()" [title]="editando() ? 'Editar ' + entity() : 'Nuevo ' + entity()" [fields]="fields()"
+  [initial]="editando()" [submitLabel]="editando() ? 'Guardar cambios' : 'Crear'" (saved)="guardar($event)" (closed)="formAbierto.set(false)" />
+
+<app-confirm-dialog [open]="porEliminar() !== null" title="Eliminar registro" confirmLabel="Eliminar" [danger]="true"
+  [message]="'¿Eliminar este ' + entity() + '? El registro no se borra: queda inactivo y se puede restaurar.'"
+  (confirmed)="confirmarEliminar()" (cancelled)="porEliminar.set(null)" />

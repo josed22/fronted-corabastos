@@ -1,0 +1,4 @@
+.datos { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin-bottom: 16px; }
+.datos div { display: flex; flex-direction: column; gap: 2px; align-items: flex-start; }
+.obs { display: flex; gap: 8px; align-items: center; margin-bottom: 14px; padding: 10px 12px; background: var(--surface-2); border-radius: 10px; color: var(--texto-suave); }
+.total { text-align: right; margin-top: 14px; font-size: 16px; }

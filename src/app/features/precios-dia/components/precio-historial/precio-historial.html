@@ -1,0 +1,8 @@
+<app-modal [open]="producto() !== null" [title]="'Historial · ' + (producto()?.producto ?? '')" size="lg" (closed)="closed.emit()">
+  @if (producto(); as p) {
+    <p class="muted" style="margin-bottom:8px">Precio por {{ p.unidad }} de los últimos {{ filas().length }} días</p>
+    <app-sparkline [values]="valores()" [color]="p.variacionPct > 0 ? '#c62828' : '#2e7d32'" />
+    <app-data-table [columns]="columnas" [rows]="filas()" [searchable]="false" [paginate]="false" />
+  }
+  <div modal-footer><button type="button" class="btn btn-ghost" (click)="closed.emit()">Cerrar</button></div>
+</app-modal>

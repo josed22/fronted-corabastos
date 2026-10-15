@@ -1,0 +1,3 @@
+<app-page-header title="Usuarios" subtitle="Administradores, vendedores y compradores registrados en el sistema" />
+<app-crud-table entity="usuario" plural="usuarios" [columns]="columnas" [rows]="filas()" [fields]="campos()" [validator]="validar"
+  (created)="crear($event)" (updated)="actualizar($event.row, $event.values)" (removed)="cambiarEstado($event, false)" (restored)="cambiarEstado($event, true)" />

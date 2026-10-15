@@ -1,0 +1,10 @@
+<app-page-header title="Categorías y tipos" subtitle="Clasificación de los productos: cada categoría tiene varios tipos" />
+<app-tabs [tabs]="pestanas" [(active)]="activa" />
+
+@if (activa() === 'categorias') {
+  <app-crud-table entity="categoría" plural="categorías" [columns]="colCategorias" [rows]="filasCategorias()" [fields]="camposCategorias" [validator]="validarCategoria"
+    (created)="crearCategoria($event)" (updated)="editarCategoria($event.row, $event.values)" (removed)="estadoCategoria($event, false)" (restored)="estadoCategoria($event, true)" />
+} @else {
+  <app-crud-table entity="tipo" plural="tipos" [columns]="colTipos" [rows]="filasTipos()" [fields]="camposTipos()" [validator]="validarTipo"
+    (created)="crearTipo($event)" (updated)="editarTipo($event.row, $event.values)" (removed)="estadoTipo($event, false)" (restored)="estadoTipo($event, true)" />
+}

@@ -1,0 +1,4 @@
+.main { margin-left: var(--sidebar); min-height: 100dvh; display: flex; flex-direction: column; }
+.content { padding: 24px; max-width: 1400px; width: 100%; margin: 0 auto; flex: 1; }
+@media (max-width: 960px) { .main { margin-left: 0; } .content { padding: 16px; } }
+@media print { .main { margin-left: 0; } }

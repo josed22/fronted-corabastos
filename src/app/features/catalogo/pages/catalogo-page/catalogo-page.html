@@ -1,0 +1,22 @@
+<app-page-header title="Catálogo de productos" subtitle="Busca un producto y mira qué bodegas lo tienen hoy, con su precio del día y su variación" />
+
+@if (esComprador()) {
+  <div class="aviso verde" style="margin-bottom:16px"><span class="material-symbols-rounded">bookmark</span>
+    <span>Al <strong>reservar</strong> apartas la cantidad en la bodega. No se hace ningún pago aquí: el retiro y el pago se acuerdan directamente con la bodega.</span></div>
+}
+
+<div class="grid grid-3" style="margin-bottom:20px">
+  <app-stat-card icon="storefront" label="Bodegas con productos" [value]="bodegas()" />
+  <app-stat-card icon="inventory_2" tone="azul" label="Productos disponibles" [value]="productos()" />
+  <app-stat-card icon="favorite" tone="naranja" label="Mis favoritos" [value]="misFavoritos()" hint="Marcados con corazón" />
+</div>
+
+<div class="row" style="margin-bottom:16px">
+  <app-filter-select label="Categoría" todos="Todas las categorías" [options]="categorias()" [(value)]="categoria" />
+  <app-filter-select label="Pabellón" todos="Todos los pabellones" [options]="pabellones()" [(value)]="pabellon" />
+</div>
+
+<app-data-table [columns]="columnas" [rows]="filas()" [actions]="acciones()" placeholder="Buscar producto, bodega o local…" emptyText="No hay bodegas con ese producto" (action)="alAccion($event)" />
+
+<app-form-modal [open]="reservando() !== null" [title]="'Reservar · ' + (reservando()?.producto ?? '')" [fields]="camposReserva()"
+  [initial]="null" submitLabel="Confirmar reserva" (saved)="reservar($event)" (closed)="reservando.set(null)" />

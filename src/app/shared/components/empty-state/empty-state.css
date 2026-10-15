@@ -1,0 +1,3 @@
+.es { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 36px 16px; color: var(--texto-suave); text-align: center; }
+.es .material-symbols-rounded { font-size: 44px; color: #b5c2b6; }
+strong { color: var(--texto); }

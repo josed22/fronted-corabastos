@@ -1,0 +1,9 @@
+<ul class="bars">
+  @for (b of items(); track b.label) {
+    <li>
+      <span class="lbl">{{ b.label }}</span>
+      <span class="track"><span class="fill" [style.width.%]="ancho(b.value)" [style.background]="b.color || '#388e3c'"></span></span>
+      <span class="num">{{ b.texto ?? b.value }}</span>
+    </li>
+  }
+</ul>

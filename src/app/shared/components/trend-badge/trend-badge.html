@@ -1,0 +1,3 @@
+<span class="tb" [class.up]="valor() > 0" [class.down]="valor() < 0" [attr.title]="titulo()">
+  <span class="material-symbols-rounded">{{ icono() }}</span>{{ signo() }}{{ absoluto() | number: '1.1-2' }}%
+</span>

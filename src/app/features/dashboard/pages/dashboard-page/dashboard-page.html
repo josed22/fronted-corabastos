@@ -1,0 +1,73 @@
+<app-page-header [title]="'Hola, ' + (auth.usuario()?.nombre ?? '')" [subtitle]="subtitulo()" />
+
+@switch (auth.rol()) {
+  @case ('Administrador') {
+    <div class="stack">
+      <div class="grid grid-4">
+        <app-stat-card icon="inventory_2" label="Productos activos" [value]="activos(store.productos())" />
+        <app-stat-card icon="storefront" tone="naranja" label="Bodegas activas" [value]="activos(store.tiendas())" />
+        <app-stat-card icon="group" tone="azul" label="Usuarios activos" [value]="activos(store.usuarios())" />
+        <app-stat-card icon="bookmark" tone="rojo" label="Reservas abiertas" [value]="abiertas()" hint="Pendientes y confirmadas" />
+      </div>
+      <div class="grid grid-2">
+        <section>
+          <h3 class="card-title"><span class="material-symbols-rounded">swap_vert</span>Mayores variaciones de hoy</h3>
+          <app-data-table [columns]="colVariaciones" [rows]="mayoresVariaciones()" [searchable]="false" [paginate]="false" />
+          <a class="btn btn-ghost" style="margin-top:12px" routerLink="/precios-dia"><span class="material-symbols-rounded">edit</span>Gestionar precios del día</a>
+        </section>
+        <section class="card card-pad">
+          <h3 class="card-title"><span class="material-symbols-rounded">bar_chart</span>Reservas por estado</h3>
+          <app-bar-chart [items]="reservasPorEstado()" />
+        </section>
+      </div>
+    </div>
+  }
+  @case ('Vendedor') {
+    @if (tienda(); as t) {
+      <div class="stack">
+        <div class="aviso verde"><span class="material-symbols-rounded">storefront</span><span><strong>{{ t.nombre }}</strong> · {{ store.ubicacion(t) }}</span></div>
+        <div class="grid grid-4">
+          <app-stat-card icon="inventory_2" label="Productos en bodega" [value]="misInventario().length" />
+          <app-stat-card icon="scale" tone="azul" label="Unidades disponibles" [value]="unidades()" />
+          <app-stat-card icon="pending_actions" tone="naranja" label="Reservas por confirmar" [value]="pendientes()" />
+          <app-stat-card icon="warning" tone="rojo" label="Con stock bajo" [value]="stockBajo().length" hint="Menos de 100 unidades" />
+        </div>
+        <div class="grid grid-2">
+          <section>
+            <h3 class="card-title"><span class="material-symbols-rounded">event_available</span>Reservas por atender</h3>
+            <app-data-table [columns]="colReservas" [rows]="porAtender()" [searchable]="false" [paginate]="false" emptyText="No hay reservas por atender" />
+            <a class="btn btn-ghost" style="margin-top:12px" routerLink="/reservas">Ver todas las reservas</a>
+          </section>
+          <section>
+            <h3 class="card-title"><span class="material-symbols-rounded">warning</span>Productos con stock bajo</h3>
+            <app-data-table [columns]="colStock" [rows]="stockBajo()" [searchable]="false" [paginate]="false" emptyText="Todo tu inventario está surtido" />
+            <a class="btn btn-ghost" style="margin-top:12px" routerLink="/inventario">Actualizar inventario</a>
+          </section>
+        </div>
+      </div>
+    }
+  }
+  @default {
+    <div class="stack">
+      <div class="grid grid-4">
+        <app-stat-card icon="bookmark" label="Mis reservas activas" [value]="misReservasActivas()" />
+        <app-stat-card icon="favorite" tone="naranja" label="Productos favoritos" [value]="misFavoritos().length" />
+        <app-stat-card icon="trending_down" tone="azul" label="Favoritos que bajaron" [value]="favoritosQueBajaron()" />
+        <app-stat-card icon="notifications" tone="rojo" label="Avisos de hoy" [value]="avisos().length" />
+      </div>
+      <div class="grid grid-2">
+        <section>
+          <h3 class="card-title"><span class="material-symbols-rounded">favorite</span>Mis favoritos hoy</h3>
+          <app-data-table [columns]="colFavoritos" [rows]="misFavoritos()" [searchable]="false" [paginate]="false" emptyText="Aún no tienes favoritos" />
+          <a class="btn btn-primary" style="margin-top:12px" routerLink="/catalogo"><span class="material-symbols-rounded">travel_explore</span>Buscar productos</a>
+        </section>
+        <section class="card card-pad">
+          <h3 class="card-title"><span class="material-symbols-rounded">notifications</span>Avisos</h3>
+          @for (a of avisos(); track $index) {
+            <p class="aviso-fila" [class]="a.tono"><span class="material-symbols-rounded">{{ a.icono }}</span>{{ a.texto }}</p>
+          } @empty { <p class="muted">No tienes avisos por ahora.</p> }
+        </section>
+      </div>
+    </div>
+  }
+}

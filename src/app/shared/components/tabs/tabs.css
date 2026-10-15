@@ -1,0 +1,5 @@
+.tabs { display: flex; gap: 6px; padding: 4px; background: #e8ede4; border-radius: 12px; width: fit-content; max-width: 100%; overflow-x: auto; margin-bottom: 16px; }
+.tab { display: inline-flex; align-items: center; gap: 6px; border: 0; background: transparent; padding: 9px 16px; border-radius: 9px;
+  font-weight: 600; color: var(--texto-suave); cursor: pointer; white-space: nowrap; }
+.tab .material-symbols-rounded { font-size: 20px; }
+.tab.on { background: var(--surface); color: var(--verde-800); box-shadow: 0 1px 4px rgb(0 0 0 / 12%); }

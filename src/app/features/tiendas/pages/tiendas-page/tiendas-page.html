@@ -1,0 +1,10 @@
+<app-page-header title="Tiendas y pabellones" subtitle="Cada pabellón agrupa las bodegas que venden una misma categoría de productos" />
+<app-tabs [tabs]="pestanas" [(active)]="activa" />
+
+@if (activa() === 'bodegas') {
+  <app-crud-table entity="bodega" plural="bodegas" [columns]="colBodegas" [rows]="filasBodegas()" [fields]="camposBodegas()" [validator]="validarBodega"
+    (created)="crearBodega($event)" (updated)="editarBodega($event.row, $event.values)" (removed)="estadoBodega($event, false)" (restored)="estadoBodega($event, true)" />
+} @else {
+  <app-crud-table entity="pabellón" plural="pabellones" [columns]="colPabellones" [rows]="filasPabellones()" [fields]="camposPabellones()" [validator]="validarPabellon"
+    (created)="crearPabellon($event)" (updated)="editarPabellon($event.row, $event.values)" (removed)="estadoPabellon($event, false)" (restored)="estadoPabellon($event, true)" />
+}

@@ -1,0 +1,7 @@
+<app-modal [open]="open()" [title]="title()" (closed)="cancelled.emit()">
+  <p class="msg">{{ message() }}</p>
+  <div modal-footer>
+    <button type="button" class="btn btn-ghost" (click)="cancelled.emit()">Cancelar</button>
+    <button type="button" class="btn" [class.btn-danger]="danger()" [class.btn-primary]="!danger()" (click)="confirmed.emit()">{{ confirmLabel() }}</button>
+  </div>
+</app-modal>

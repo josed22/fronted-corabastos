@@ -1,0 +1,61 @@
+<div class="lg">
+  <section class="hero" aria-hidden="false">
+    <div class="hero-in">
+      <span class="logo"><span class="material-symbols-rounded fill">agriculture</span></span>
+      <h1>Corabastos <span>Conecta</span></h1>
+      <p class="lema">Consulta el precio del día, mira qué bodega tiene tu producto y apártalo antes de llegar a la plaza.</p>
+      <ul class="puntos">
+        <li><span class="material-symbols-rounded">trending_up</span>Precios del día con su variación porcentual</li>
+        <li><span class="material-symbols-rounded">storefront</span>Bodegas organizadas por pabellón</li>
+        <li><span class="material-symbols-rounded">bookmark</span>Reserva de productos para tu retiro</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="formulario">
+    <div class="caja card">
+      <h2>Iniciar sesión</h2>
+      <p class="muted">Elige tu perfil e ingresa tus datos.</p>
+
+      <fieldset class="roles">
+        <legend class="label">Ingresar como</legend>
+        <div class="roles-grid">
+          @for (r of roles(); track r.id) {
+            <label class="rol" [class.on]="rolElegido() === r.nombre">
+              <input type="radio" name="rol" [value]="r.nombre" [checked]="rolElegido() === r.nombre" (change)="elegirRol(r.nombre)" />
+              <span class="material-symbols-rounded">{{ r.icono }}</span>
+              <strong>{{ r.nombre }}</strong>
+            </label>
+          }
+        </div>
+        <p class="hint">Módulos de este perfil: {{ modulosDelRol().join(', ') }}.</p>
+      </fieldset>
+
+      <form [formGroup]="form" (ngSubmit)="ingresar()" novalidate>
+        <div class="field">
+          <label for="correo">Correo electrónico</label>
+          <input id="correo" class="input" type="email" formControlName="correo" autocomplete="username" placeholder="nombre@correo.com" />
+          @if (form.controls.correo.touched && form.controls.correo.invalid) { <small class="error">Escribe un correo válido</small> }
+        </div>
+        <div class="field">
+          <label for="clave">Contraseña</label>
+          <div class="clave">
+            <input id="clave" class="input" [type]="verClave() ? 'text' : 'password'" formControlName="password" autocomplete="current-password" />
+            <button type="button" class="icon-btn" [attr.aria-label]="verClave() ? 'Ocultar contraseña' : 'Mostrar contraseña'" (click)="verClave.set(!verClave())">
+              <span class="material-symbols-rounded">{{ verClave() ? 'visibility_off' : 'visibility' }}</span>
+            </button>
+          </div>
+          @if (form.controls.password.touched && form.controls.password.invalid) { <small class="error">Mínimo 6 caracteres</small> }
+        </div>
+        <button type="submit" class="btn btn-primary entrar" [disabled]="cargando()">
+          @if (cargando()) { Ingresando… } @else { <span class="material-symbols-rounded">login</span>Ingresar }
+        </button>
+      </form>
+
+      <div class="aviso">
+        <span class="material-symbols-rounded">info</span>
+        <span>Versión de demostración: el inicio de sesión no se conecta a la API, entra directamente con el perfil elegido.</span>
+      </div>
+    </div>
+  </section>
+</div>

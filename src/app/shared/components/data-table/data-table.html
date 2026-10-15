@@ -1,0 +1,74 @@
+<section class="dt card">
+  @if (searchable()) {
+    <div class="dt-toolbar no-print">
+      <label class="dt-search">
+        <span class="material-symbols-rounded">search</span>
+        <input type="search" [placeholder]="placeholder()" [attr.aria-label]="placeholder()" (input)="buscar($any($event.target).value)" />
+      </label>
+      <span class="dt-count muted">{{ total() }} {{ total() === 1 ? 'registro' : 'registros' }}</span>
+      <span class="spacer"></span>
+      <ng-content select="[toolbar]" />
+    </div>
+  }
+
+  <div class="dt-scroll">
+    <table mat-table [dataSource]="dataSource" matSort>
+      @for (col of columns(); track col.key) {
+        <ng-container [matColumnDef]="col.key">
+          @if (col.sortable === false) {
+            <th mat-header-cell *matHeaderCellDef [class]="'al-' + (col.align ?? 'left')">{{ col.label }}</th>
+          } @else {
+            <th mat-header-cell *matHeaderCellDef mat-sort-header [class]="'al-' + (col.align ?? 'left')">{{ col.label }}</th>
+          }
+          <td mat-cell *matCellDef="let fila" [class]="'al-' + (col.align ?? (col.type === 'currency' || col.type === 'number' ? 'right' : 'left')) + (col.wrap ? ' wrap' : '')">
+            @switch (col.type) {
+              @case ('currency') { <span class="nowrap">{{ fila[col.key] | moneda }}</span> }
+              @case ('number') { {{ fila[col.key] | number: '1.0-2' }} }
+              @case ('date') { <span class="nowrap">{{ fila[col.key] | date: 'dd/MM/yyyy' }}</span> }
+              @case ('trend') { <app-trend-badge [value]="fila[col.key]" /> }
+              @case ('badge') { <app-status-badge [label]="fila[col.key]" [tone]="tono(col, fila[col.key])" /> }
+              @case ('estado') { <app-status-badge [label]="fila[col.key] ? 'Activo' : 'Inactivo'" [tone]="fila[col.key] ? 'success' : 'neutral'" /> }
+              @case ('check') {
+                <label class="sw">
+                  <input type="checkbox" [checked]="fila[col.key]" [attr.aria-label]="col.label + ': ' + (fila['nombre'] ?? '')" (change)="alternar(fila, col.key, $event)" />
+                  <span class="sw-pista"></span>
+                </label>
+              }
+              @default { {{ fila[col.key] }} }
+            }
+          </td>
+        </ng-container>
+      }
+
+      @if (actions().length) {
+        <ng-container matColumnDef="__acciones">
+          <th mat-header-cell *matHeaderCellDef class="al-right">Acciones</th>
+          <td mat-cell *matCellDef="let fila" class="al-right">
+            <div class="acc">
+              @for (a of actions(); track a.id) {
+                @if (!a.visible || a.visible(fila)) {
+                  <button type="button" class="icon-btn" [class.danger]="a.color === 'danger'" [class.primary]="a.color === 'primary'"
+                    [attr.aria-label]="etiqueta(a, fila)" [title]="etiqueta(a, fila)" (click)="action.emit({ action: a.id, row: fila })">
+                    <span class="material-symbols-rounded">{{ icono(a, fila) }}</span>
+                  </button>
+                }
+              }
+            </div>
+          </td>
+        </ng-container>
+      }
+
+      <tr mat-header-row *matHeaderRowDef="columnasMostradas()"></tr>
+      <tr mat-row *matRowDef="let fila; columns: columnasMostradas()"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" [attr.colspan]="columnasMostradas().length || 1">
+          <app-empty-state icon="search_off" [title]="emptyText()" text="Prueba con otra búsqueda o limpia los filtros." />
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  @if (paginate()) {
+    <mat-paginator class="no-print" [pageSize]="pageSize()" [pageSizeOptions]="[5, 10, 25, 50]" showFirstLastButtons aria-label="Paginación de la tabla" />
+  }
+</section>

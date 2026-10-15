@@ -1,0 +1,8 @@
+<article class="sc card">
+  <span class="ico" [class]="tone()"><span class="material-symbols-rounded">{{ icon() }}</span></span>
+  <div class="txt">
+    <span class="lbl">{{ label() }}</span>
+    <strong class="val">{{ value() }}</strong>
+    @if (hint()) { <span class="hint">{{ hint() }}</span> }
+  </div>
+</article>

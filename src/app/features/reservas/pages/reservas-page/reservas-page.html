@@ -1,0 +1,15 @@
+<app-page-header title="Reservas recibidas" [subtitle]="tienda() ? tienda()!.nombre + ' · ' + ubicacion() : 'Sin bodega asignada'" />
+
+@if (tienda()) {
+  <div class="grid grid-4" style="margin-bottom:20px">
+    <app-stat-card icon="pending_actions" tone="naranja" label="Por confirmar" [value]="contar('Pendiente')" />
+    <app-stat-card icon="check_circle" tone="azul" label="Confirmadas" [value]="contar('Confirmada')" hint="Esperando al comprador" />
+    <app-stat-card icon="inventory" label="Retiradas" [value]="contar('Retirada')" />
+    <app-stat-card icon="cancel" tone="rojo" label="Canceladas" [value]="contar('Cancelada')" />
+  </div>
+  <app-data-table [columns]="columnas" [rows]="filas()" [actions]="acciones" placeholder="Buscar por código, comprador o estado…" emptyText="Aún no tienes reservas" (action)="alAccion($event)" />
+} @else {
+  <div class="card"><app-empty-state icon="storefront" title="No tienes una bodega asignada" text="Pide al administrador que te asigne una bodega." /></div>
+}
+
+<app-reserva-detalle [reserva]="detalle()" (closed)="detalle.set(null)" />

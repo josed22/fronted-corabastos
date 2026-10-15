@@ -1,0 +1,46 @@
+.lg { min-height: 100dvh; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); }
+.hero { position: relative; display: flex; align-items: center; padding: 48px; color: #fff; overflow: hidden;
+  background: radial-gradient(900px 500px at 10% 0%, #2e7d32 0%, transparent 60%), linear-gradient(160deg, var(--verde-800), var(--verde-900)); }
+.hero::after { content: ''; position: absolute; right: -120px; bottom: -120px; width: 380px; height: 380px; border-radius: 50%;
+  background: radial-gradient(circle, rgb(245 124 0 / 55%), transparent 68%); }
+.hero-in { position: relative; z-index: 1; max-width: 520px; }
+.logo { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 16px; background: var(--naranja-500); margin-bottom: 22px; }
+.logo .material-symbols-rounded { font-size: 32px; }
+h1 { font-size: 44px; letter-spacing: -0.03em; }
+h1 span { color: #ffcc80; }
+.lema { margin-top: 14px; font-size: 18px; color: #d4ead6; line-height: 1.55; }
+.puntos { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-direction: column; gap: 14px; }
+.puntos li { display: flex; align-items: center; gap: 12px; color: #e6f3e7; }
+.puntos .material-symbols-rounded { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 11px; background: rgb(255 255 255 / 14%); }
+
+.formulario { display: grid; place-items: center; padding: 32px 20px; }
+.caja { width: min(480px, 100%); padding: 32px; }
+.caja h2 { font-size: 26px; }
+form { display: flex; flex-direction: column; gap: 16px; margin: 18px 0; }
+.roles { border: 0; padding: 0; margin: 22px 0 0; min-width: 0; }
+.roles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 8px; }
+.rol { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 14px 8px; border: 2px solid var(--borde);
+  border-radius: 14px; cursor: pointer; text-align: center; transition: border-color .15s, background .15s; background: var(--surface); }
+.rol input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.rol .material-symbols-rounded { font-size: 28px; color: var(--texto-suave); }
+.rol strong { font-size: 13.5px; }
+.rol:hover { border-color: #b9d3bb; }
+.rol.on { border-color: var(--verde-700); background: var(--verde-50); }
+.rol.on .material-symbols-rounded { color: var(--verde-700); }
+.rol:has(input:focus-visible) { outline: 3px solid color-mix(in srgb, var(--verde-700) 55%, white); outline-offset: 2px; }
+.roles .hint { margin-top: 10px; }
+.clave { position: relative; }
+.clave .input { padding-right: 52px; }
+.clave .icon-btn { position: absolute; right: 4px; top: 3px; }
+.entrar { width: 100%; min-height: 48px; font-size: 15px; }
+
+@media (max-width: 900px) {
+  .lg { grid-template-columns: 1fr; }
+  .hero { padding: 28px 22px; }
+  h1 { font-size: 32px; }
+  .lema { font-size: 15.5px; }
+  .puntos { display: none; }
+  .logo { margin-bottom: 14px; width: 46px; height: 46px; }
+  .caja { padding: 24px 20px; }
+}
+@media (max-width: 420px) { .roles-grid { grid-template-columns: 1fr; } .rol { flex-direction: row; justify-content: flex-start; padding: 10px 14px; } }

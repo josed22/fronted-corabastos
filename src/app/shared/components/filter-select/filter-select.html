@@ -1,0 +1,7 @@
+<div class="field">
+  <label [for]="id">{{ label() }}</label>
+  <select class="select" [id]="id" [value]="value()" (change)="value.set($any($event.target).value)">
+    <option value="">{{ todos() }}</option>
+    @for (o of options(); track o) { <option [value]="o">{{ o }}</option> }
+  </select>
+</div>

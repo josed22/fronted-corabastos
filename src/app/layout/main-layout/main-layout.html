@@ -1,0 +1,6 @@
+<app-sidebar [open]="menuAbierto()" (close)="menuAbierto.set(false)" />
+<div class="main">
+  <app-navbar (menu)="menuAbierto.set(!menuAbierto())" />
+  <main class="content" id="contenido"><router-outlet /></main>
+  <app-footer />
+</div>

@@ -1,0 +1,3 @@
+<app-page-header title="Productos" subtitle="Catálogo maestro de productos que se venden en Corabastos" />
+<app-crud-table entity="producto" plural="productos" [columns]="columnas" [rows]="filas()" [fields]="campos()" [validator]="validar"
+  (created)="crear($event)" (updated)="actualizar($event.row, $event.values)" (removed)="cambiarEstado($event, false)" (restored)="cambiarEstado($event, true)" />

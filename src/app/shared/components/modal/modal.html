@@ -1,0 +1,12 @@
+@if (open()) {
+  <div class="backdrop" (click)="clicFondo($event)">
+    <section class="dialog" [class.lg]="size() === 'lg'" role="dialog" aria-modal="true" [attr.aria-label]="title()">
+      <header class="dh">
+        <h2>{{ title() }}</h2>
+        <button type="button" class="icon-btn" aria-label="Cerrar" (click)="cerrar()"><span class="material-symbols-rounded">close</span></button>
+      </header>
+      <div class="db"><ng-content /></div>
+      <footer class="df"><ng-content select="[modal-footer]" /></footer>
+    </section>
+  </div>
+}

@@ -1,0 +1,17 @@
+<app-page-header title="Inventario de mi bodega" [subtitle]="tienda() ? tienda()!.nombre + ' · ' + ubicacion() : 'Sin bodega asignada'" />
+
+@if (tienda()) {
+  <div class="aviso" style="margin-bottom:16px"><span class="material-symbols-rounded">info</span>
+    <span>El precio de cada producto lo fija el administrador cada día. Tú solo registras la <strong>cantidad disponible</strong> y, en tu pabellón, solo puedes manejar productos de la categoría <strong>{{ categoria() }}</strong>.</span></div>
+
+  <div class="grid grid-3" style="margin-bottom:20px">
+    <app-stat-card icon="inventory_2" label="Productos en bodega" [value]="mios().filter(m => m['estado']).length" />
+    <app-stat-card icon="scale" tone="azul" label="Unidades disponibles" [value]="unidades()" />
+    <app-stat-card icon="warning" tone="naranja" label="Con stock bajo" [value]="bajos()" hint="Menos de 100 unidades" />
+  </div>
+
+  <app-crud-table entity="producto en inventario" plural="productos" [columns]="columnas" [rows]="mios()" [fields]="campos()" [validator]="validar"
+    (created)="crear($event)" (updated)="actualizar($event.row, $event.values)" (removed)="cambiarEstado($event, false)" (restored)="cambiarEstado($event, true)" />
+} @else {
+  <div class="card"><app-empty-state icon="storefront" title="No tienes una bodega asignada" text="Pide al administrador que te asigne una bodega." /></div>
+}

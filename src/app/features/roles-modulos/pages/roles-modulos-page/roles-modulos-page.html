@@ -1,0 +1,16 @@
+<app-page-header title="Roles y módulos" subtitle="Define a qué módulos puede entrar cada rol. Los cambios se aplican al siguiente inicio de sesión." />
+
+<div class="grid grid-3" style="margin-bottom:20px">
+  @for (r of roles(); track r.id) {
+    <article class="card card-pad rol">
+      <span class="ico"><span class="material-symbols-rounded">{{ r.icono }}</span></span>
+      <div>
+        <h3>{{ r.nombre }}</h3>
+        <p class="muted">{{ r.descripcion }}</p>
+        <strong class="num">{{ cantidad(r.id) }} módulos con acceso</strong>
+      </div>
+    </article>
+  }
+</div>
+
+<app-data-table [columns]="columnas()" [rows]="filas()" [paginate]="false" placeholder="Buscar módulo…" (toggle)="alternar($event)" />

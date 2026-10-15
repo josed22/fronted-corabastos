@@ -1,0 +1,14 @@
+<app-modal [open]="reserva() !== null" [title]="'Reserva ' + (reserva()?.['codigo'] ?? '')" size="lg" (closed)="closed.emit()">
+  @if (reserva(); as r) {
+    <div class="datos">
+      <div><small class="muted">Bodega</small><strong>{{ r['tienda'] }}</strong><span class="muted">{{ r['ubicacion'] }}</span></div>
+      <div><small class="muted">Comprador</small><strong>{{ r['comprador'] ?? '—' }}</strong></div>
+      <div><small class="muted">Retiro</small><strong>{{ r['fechaRetiro'] }}</strong></div>
+      <div><small class="muted">Estado</small><app-status-badge [label]="r['estadoReserva']" [tone]="tono(r['estadoReserva'])" /></div>
+    </div>
+    @if (r['observacion']) { <p class="obs"><span class="material-symbols-rounded">chat</span>{{ r['observacion'] }}</p> }
+    <app-data-table [columns]="columnas" [rows]="filas()" [searchable]="false" [paginate]="false" />
+    <p class="total">Total estimado: <strong>{{ total() | moneda }}</strong></p>
+  }
+  <div modal-footer><button type="button" class="btn btn-ghost" (click)="closed.emit()">Cerrar</button></div>
+</app-modal>

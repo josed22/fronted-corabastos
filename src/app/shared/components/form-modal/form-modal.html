@@ -1,0 +1,37 @@
+<app-modal [open]="open()" [title]="title()" [size]="size()" (closed)="closed.emit()">
+  <form [id]="formId" [formGroup]="form()" (ngSubmit)="guardar()" novalidate>
+    <div class="fm-grid">
+      @for (f of visibles(); track f.key) {
+        <div class="field" [class.full]="f.full || f.type === 'textarea'">
+          @if (f.type !== 'checkbox') {
+            <label [for]="formId + f.key">{{ f.label }}@if (f.required) { <span class="req"> *</span> }</label>
+          }
+          @switch (f.type) {
+            @case ('select') {
+              <select class="select" [id]="formId + f.key" [formControlName]="f.key">
+                <option value="" disabled>Seleccione…</option>
+                @for (o of f.options; track o.value) { <option [ngValue]="o.value">{{ o.label }}</option> }
+              </select>
+            }
+            @case ('textarea') {
+              <textarea class="input" rows="3" [id]="formId + f.key" [formControlName]="f.key" [placeholder]="f.placeholder ?? ''"></textarea>
+            }
+            @case ('checkbox') {
+              <label class="check"><input type="checkbox" [formControlName]="f.key" />{{ f.label }}</label>
+            }
+            @default {
+              <input class="input" [type]="f.type" [id]="formId + f.key" [formControlName]="f.key" [placeholder]="f.placeholder ?? ''"
+                [attr.min]="f.min ?? null" [attr.max]="f.max ?? null" [attr.step]="f.step ?? null" [attr.autocomplete]="f.type === 'password' ? 'new-password' : 'off'" />
+            }
+          }
+          @if (invalido(f)) { <small class="error">{{ mensaje(f) }}</small> }
+          @else if (f.hint) { <small class="hint">{{ f.hint }}</small> }
+        </div>
+      }
+    </div>
+  </form>
+  <div modal-footer>
+    <button type="button" class="btn btn-ghost" (click)="closed.emit()">Cancelar</button>
+    <button type="submit" class="btn btn-primary" [attr.form]="formId">{{ submitLabel() }}</button>
+  </div>
+</app-modal>

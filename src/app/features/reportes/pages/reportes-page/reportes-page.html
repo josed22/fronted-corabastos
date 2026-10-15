@@ -1,0 +1,39 @@
+<app-page-header title="Reportes" [subtitle]="'Resumen de precios y reservas al ' + store.hoy">
+  <button type="button" class="btn btn-ghost" (click)="imprimir()"><span class="material-symbols-rounded">print</span>Imprimir o guardar PDF</button>
+</app-page-header>
+
+<div class="stack">
+  <div class="grid grid-4">
+    <app-stat-card icon="trending_up" tone="rojo" label="Productos que subieron" [value]="subidas().length" />
+    <app-stat-card icon="trending_down" label="Productos que bajaron" [value]="bajadas().length" />
+    <app-stat-card icon="bookmark" tone="azul" label="Reservas registradas" [value]="store.reservas().length" />
+    <app-stat-card icon="payments" tone="naranja" label="Valor reservado (activas)" [value]="valorActivo() | moneda" />
+  </div>
+
+  <div class="grid grid-2">
+    <section class="card card-pad">
+      <h3 class="card-title"><span class="material-symbols-rounded">bookmark</span>Reservas por estado</h3>
+      <app-bar-chart [items]="porEstado()" />
+    </section>
+    <section class="card card-pad">
+      <h3 class="card-title"><span class="material-symbols-rounded">domain</span>Reservas por pabellón</h3>
+      <app-bar-chart [items]="porPabellon()" />
+    </section>
+  </div>
+
+  <section class="card card-pad">
+    <h3 class="card-title"><span class="material-symbols-rounded">sell</span>Precio promedio por categoría (hoy)</h3>
+    <app-bar-chart [items]="promedios()" />
+  </section>
+
+  <div class="grid grid-2">
+    <section>
+      <h3 class="card-title"><span class="material-symbols-rounded">trending_up</span>Mayores subidas de hoy</h3>
+      <app-data-table [columns]="columnas" [rows]="subidas().slice(0, 6)" [searchable]="false" [paginate]="false" />
+    </section>
+    <section>
+      <h3 class="card-title"><span class="material-symbols-rounded">trending_down</span>Mayores bajadas de hoy</h3>
+      <app-data-table [columns]="columnas" [rows]="bajadas().slice(0, 6)" [searchable]="false" [paginate]="false" />
+    </section>
+  </div>
+</div>
